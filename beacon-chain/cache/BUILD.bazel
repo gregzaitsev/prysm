@@ -25,6 +25,7 @@ go_library(
         "sync_committee_disabled.go",  # keep
         "sync_committee_head_state.go",
         "sync_subnet_ids.go",
+        "tracked_validators.go",
     ],
     importpath = "github.com/prysmaticlabs/prysm/v4/beacon-chain/cache",
     visibility = [
@@ -35,7 +36,6 @@ go_library(
     deps = [
         "//beacon-chain/state:go_default_library",
         "//cache/lru:go_default_library",
-        "//config/fieldparams:go_default_library",
         "//config/params:go_default_library",
         "//consensus-types/primitives:go_default_library",
         "//container/slice:go_default_library",

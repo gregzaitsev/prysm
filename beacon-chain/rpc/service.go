@@ -127,11 +127,12 @@ type Config struct {
 	StateGen                      *stategen.State
 	MaxMsgSize                    int
 	ExecutionEngineCaller         execution.EngineCaller
-	ProposerIdsCache              *cache.ProposerPayloadIDsCache
 	OptimisticModeFetcher         blockchain.OptimisticModeFetcher
 	BlockBuilder                  builder.BlockBuilder
 	Router                        *mux.Router
 	ClockWaiter                   startup.ClockWaiter
+	TrackedValidatorsCache        *cache.TrackedValidatorsCache
+	PayloadIDCache                *cache.PayloadIDCache
 }
 
 // NewService instantiates a new RPC service instance that will
@@ -286,7 +287,6 @@ func (s *Service) Start() {
 		ReplayerBuilder:        ch,
 		ExecutionEngineCaller:  s.cfg.ExecutionEngineCaller,
 		BeaconDB:               s.cfg.BeaconDB,
-		ProposerSlotIndexCache: s.cfg.ProposerIdsCache,
 		BlockBuilder:           s.cfg.BlockBuilder,
 		BLSChangesPool:         s.cfg.BLSChangesPool,
 		ClockWaiter:            s.cfg.ClockWaiter,
@@ -303,11 +303,12 @@ func (s *Service) Start() {
 		V1Alpha1Server:         validatorServer,
 		Stater:                 stater,
 		SyncCommitteePool:      s.cfg.SyncCommitteeObjectPool,
-		ProposerSlotIndexCache: s.cfg.ProposerIdsCache,
 		ChainInfoFetcher:       s.cfg.ChainInfoFetcher,
 		BeaconDB:               s.cfg.BeaconDB,
 		BlockBuilder:           s.cfg.BlockBuilder,
 		OperationNotifier:      s.cfg.OperationNotifier,
+		TrackedValidatorsCache: s.cfg.TrackedValidatorsCache,
+		PayloadIDCache:         s.cfg.PayloadIDCache,
 		CoreService:            coreService,
 		BlockRewardFetcher:     rewardFetcher,
 	}
